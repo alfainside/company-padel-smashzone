@@ -18,10 +18,10 @@ const FACILITIES = [
 ];
 
 const COURTS = [
-  { id: 1, name: "Court Alpha", type: "Indoor Panoramic", features: ["Kaca Panoramic 360°", "AC Central", "Lantai Greenset Pro", "Kapasitas 50 penonton"], available: true },
-  { id: 2, name: "Court Beta", type: "Indoor Premium", features: ["Dinding Kaca Tinggi", "Ventilasi Udara", "Lantai AstroTurf", "Kapasitas 30 penonton"], available: true },
-  { id: 3, name: "Court Gamma", type: "Semi-Outdoor", features: ["Atap Transparan", "Angin Alami", "Lantai Sand Turf", "View Taman Kota"], available: false },
-  { id: 4, name: "Court Delta", type: "VIP Suite", features: ["Private Lounge", "AC Eksklusif", "Lantai Premium Felt", "Kapasitas 80 penonton"], available: true },
+  { id: 1, name: "Court Alpha", type: "Indoor Panoramic", image: "/courts/alpha.png", features: ["Kaca Panoramic 360°", "AC Central", "Lantai Greenset Pro", "Kapasitas 50 penonton"], available: true },
+  { id: 2, name: "Court Beta", type: "Indoor Premium", image: "/courts/beta.png", features: ["Dinding Kaca Tinggi", "Ventilasi Udara", "Lantai AstroTurf", "Kapasitas 30 penonton"], available: true },
+  { id: 3, name: "Court Gamma", type: "Semi-Outdoor", image: "/courts/gamma.png", features: ["Atap Transparan", "Angin Alami", "Lantai Sand Turf", "View Taman Kota"], available: false },
+  { id: 4, name: "Court Delta", type: "VIP Suite", image: "/courts/delta.png", features: ["Private Lounge", "AC Eksklusif", "Lantai Premium Felt", "Kapasitas 80 penonton"], available: true },
 ];
 
 const DAYS = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu", "Minggu"];
@@ -67,21 +67,7 @@ const PRICING = [
   },
 ];
 
-function CourtDiagram() {
-  return (
-    <svg viewBox="0 0 280 180" style={{width:"100%",height:"auto",borderRadius:"8px"}} xmlns="http://www.w3.org/2000/svg">
-      <rect width="280" height="180" fill="#044d3e" rx="6"/>
-      <rect x="20" y="20" width="240" height="140" fill="none" stroke="#c8f059" strokeWidth="2.5" rx="3"/>
-      <line x1="140" y1="20" x2="140" y2="160" stroke="#f7fee6" strokeWidth="2.5"/>
-      <line x1="20" y1="83" x2="140" y2="83" stroke="rgba(247,254,230,0.6)" strokeWidth="1.5"/>
-      <line x1="140" y1="97" x2="260" y2="97" stroke="rgba(247,254,230,0.6)" strokeWidth="1.5"/>
-      <line x1="80" y1="20" x2="80" y2="160" stroke="rgba(247,254,230,0.35)" strokeWidth="1" strokeDasharray="5,4"/>
-      <line x1="200" y1="20" x2="200" y2="160" stroke="rgba(247,254,230,0.35)" strokeWidth="1" strokeDasharray="5,4"/>
-      <rect x="10" y="10" width="260" height="160" fill="none" stroke="rgba(200,240,89,0.2)" strokeWidth="7" rx="6"/>
-      <circle cx="139" cy="90" r="7" fill="#c8f059"/>
-    </svg>
-  );
-}
+
 
 function HeroArt() {
   return (
@@ -356,7 +342,15 @@ export default function App() {
               <div key={c.id} className="crt-card" style={{ background: G, borderRadius: "18px", overflow: "hidden", boxShadow: "0 4px 24px rgba(6,99,80,.14)", transition: "all 0.3s", cursor: "pointer" }}
                 onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-8px) scale(1.01)"; e.currentTarget.style.boxShadow = "0 22px 52px rgba(6,99,80,.26)"; }}
                 onMouseLeave={e => { e.currentTarget.style.transform = ""; e.currentTarget.style.boxShadow = "0 4px 24px rgba(6,99,80,.14)"; }}>
-                <div style={{ padding: "1.4rem 1.4rem 0" }}><CourtDiagram /></div>
+                <div style={{ padding: "1.2rem 1.2rem 0" }}>
+                  <div style={{ width: "100%", height: "200px", borderRadius: "14px", overflow: "hidden", position: "relative" }}>
+                    <img src={c.image} alt={c.name} style={{ width: "100%", height: "100%", objectFit: "cover", transition: "transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)" }} 
+                      onMouseEnter={e => e.currentTarget.style.transform = "scale(1.1)"}
+                      onMouseLeave={e => e.currentTarget.style.transform = "scale(1)"}
+                    />
+                    <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(6,99,80,0.4), transparent)", pointerEvents: "none" }} />
+                  </div>
+                </div>
                 <div style={{ padding: "1.4rem" }}>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "0.4rem" }}>
                     <span style={{ fontFamily: "'Bebas Neue',sans-serif", fontSize: "1.4rem", color: C, letterSpacing: "0.05em" }}>{c.name}</span>
